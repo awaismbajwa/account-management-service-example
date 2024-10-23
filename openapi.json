@@ -1,0 +1,1727 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "mobilab_account_management_service",
+    "version": "1.0.0",
+    "description": "Simple account management service to be integrated into bigger banking system",
+    "contact": {}
+  },
+  "paths": {
+    "/accounts/count": {
+      "get": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "count",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Account model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Account.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Account>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "AccountController.count"
+      }
+    },
+    "/accounts/{id}/customer": {
+      "get": {
+        "x-controller-name": "AccountCustomerController",
+        "x-operation-name": "getCustomer",
+        "tags": [
+          "AccountCustomerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer belonging to Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "AccountCustomerController.getCustomer"
+      }
+    },
+    "/accounts/{id}": {
+      "put": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Account PUT success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "AccountController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Account PATCH success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "AccountController.updateById"
+      },
+      "get": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "findById",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Account model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "AccountController.findById"
+      },
+      "delete": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Account DELETE success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "AccountController.deleteById"
+      }
+    },
+    "/accounts": {
+      "post": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "create",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Account model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAccount"
+              }
+            }
+          }
+        },
+        "operationId": "AccountController.create"
+      },
+      "patch": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Account PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Account.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Account>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountPartial"
+              }
+            }
+          }
+        },
+        "operationId": "AccountController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "AccountController",
+        "x-operation-name": "find",
+        "tags": [
+          "AccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Account model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "AccountController.find"
+      }
+    },
+    "/accounttransaction": {
+      "post": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "createAccountTransaction",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Create a transaction between two accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sender_id",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "receiver_id",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sender_amount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "TransactionController.createAccountTransaction"
+      }
+    },
+    "/customers/count": {
+      "get": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "count",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Customer.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Customer>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CustomerController.count"
+      }
+    },
+    "/customers/{id}/accounts": {
+      "get": {
+        "x-controller-name": "CustomerAccountController",
+        "x-operation-name": "find",
+        "tags": [
+          "CustomerAccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Customer has many Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CustomerAccountController.find"
+      }
+    },
+    "/customers/{id}": {
+      "put": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Customer PUT success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "CustomerController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Customer PATCH success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "CustomerController.updateById"
+      },
+      "get": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "findById",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CustomerController.findById"
+      },
+      "delete": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Customer DELETE success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "CustomerController.deleteById"
+      }
+    },
+    "/customers": {
+      "post": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "create",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCustomer"
+              }
+            }
+          }
+        },
+        "operationId": "CustomerController.create"
+      },
+      "patch": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Customer.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Customer>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerPartial"
+              }
+            }
+          }
+        },
+        "operationId": "CustomerController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "CustomerController",
+        "x-operation-name": "find",
+        "tags": [
+          "CustomerController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Customer model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "CustomerController.find"
+      }
+    },
+    "/transactions/count": {
+      "get": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "count",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Transaction.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Transaction>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TransactionController.count"
+      }
+    },
+    "/transactions/{id}/account": {
+      "get": {
+        "x-controller-name": "TransactionAccountController",
+        "x-operation-name": "getAccount",
+        "tags": [
+          "TransactionAccountController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Account belonging to Transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TransactionAccountController.getAccount"
+      }
+    },
+    "/transactions/{id}": {
+      "get": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "findById",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TransactionController.findById"
+      },
+      "delete": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "204": {
+            "description": "Transaction DELETE success"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TransactionController.deleteById"
+      }
+    },
+    "/transactions": {
+      "post": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "create",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewTransaction"
+              }
+            }
+          }
+        },
+        "operationId": "TransactionController.create"
+      },
+      "get": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "find",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Transaction model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "TransactionController.find"
+      }
+    },
+    "/transactionslog/{startDate}/{endDate}": {
+      "get": {
+        "x-controller-name": "TransactionController",
+        "x-operation-name": "findByTime",
+        "tags": [
+          "TransactionController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction log between start and end date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "TransactionController.findByTime"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Customer": {
+        "title": "Customer",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "additionalProperties": false
+      },
+      "Account": {
+        "title": "Account",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 5
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "eur",
+              "usd"
+            ]
+          },
+          "balance": {
+            "type": "number",
+            "minimum": 0
+          },
+          "customerId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "currency"
+        ],
+        "additionalProperties": false
+      },
+      "NewAccount": {
+        "title": "NewAccount",
+        "description": "(tsType: Omit<Account, 'id'>, schemaOptions: { title: 'NewAccount', exclude: [ 'id' ] })",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 5
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "eur",
+              "usd"
+            ]
+          },
+          "balance": {
+            "type": "number",
+            "minimum": 0
+          },
+          "customerId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "currency"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Account, 'id'>"
+      },
+      "CustomerWithRelations": {
+        "title": "CustomerWithRelations",
+        "description": "(tsType: CustomerWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountWithRelations"
+            }
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "CustomerWithRelations"
+      },
+      "AccountWithRelations": {
+        "title": "AccountWithRelations",
+        "description": "(tsType: AccountWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 5
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "eur",
+              "usd"
+            ]
+          },
+          "balance": {
+            "type": "number",
+            "minimum": 0
+          },
+          "customerId": {
+            "type": "number"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/CustomerWithRelations"
+          }
+        },
+        "required": [
+          "title",
+          "currency"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "AccountWithRelations"
+      },
+      "AccountPartial": {
+        "title": "AccountPartial",
+        "description": "(tsType: Partial<Account>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 5
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "eur",
+              "usd"
+            ]
+          },
+          "balance": {
+            "type": "number",
+            "minimum": 0
+          },
+          "customerId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Account>"
+      },
+      "NewCustomer": {
+        "title": "NewCustomer",
+        "description": "(tsType: Omit<Customer, 'id'>, schemaOptions: { title: 'NewCustomer', exclude: [ 'id' ] })",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Customer, 'id'>"
+      },
+      "CustomerPartial": {
+        "title": "CustomerPartial",
+        "description": "(tsType: Partial<Customer>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Customer>"
+      },
+      "Transaction": {
+        "title": "Transaction",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "debit",
+              "credit"
+            ]
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accountId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "amount",
+          "createdOn"
+        ],
+        "additionalProperties": false
+      },
+      "NewTransaction": {
+        "title": "NewTransaction",
+        "description": "(tsType: Omit<Transaction, 'id'>, schemaOptions: { title: 'NewTransaction', exclude: [ 'id' ] })",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "debit",
+              "credit"
+            ]
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accountId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "amount",
+          "createdOn"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Transaction, 'id'>"
+      },
+      "TransactionWithRelations": {
+        "title": "TransactionWithRelations",
+        "description": "(tsType: TransactionWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "debit",
+              "credit"
+            ]
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accountId": {
+            "type": "number"
+          },
+          "account": {
+            "$ref": "#/components/schemas/AccountWithRelations"
+          }
+        },
+        "required": [
+          "type",
+          "amount",
+          "createdOn"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "TransactionWithRelations"
+      },
+      "Date": {},
+      "loopback.Count": {
+        "type": "object",
+        "title": "loopback.Count",
+        "x-typescript-type": "@loopback/repository#Count",
+        "properties": {
+          "count": {
+            "type": "number"
+          }
+        }
+      },
+      "Account.Fields": {
+        "title": "Account.Fields",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "boolean"
+          },
+          "currency": {
+            "type": "boolean"
+          },
+          "balance": {
+            "type": "boolean"
+          },
+          "customerId": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Account.ScopeFilter": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false,
+        "title": "Account.ScopeFilter"
+      },
+      "Account.IncludeFilter.Items": {
+        "title": "Account.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Account.ScopeFilter"
+          }
+        }
+      },
+      "Account.Filter": {
+        "type": "object",
+        "title": "Account.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fields": {
+            "$ref": "#/components/schemas/Account.Fields"
+          },
+          "include": {
+            "title": "Account.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Account>"
+      },
+      "Account.Filter1": {
+        "type": "object",
+        "title": "Account.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "where": {
+            "title": "Account.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "$ref": "#/components/schemas/Account.Fields"
+          },
+          "include": {
+            "title": "Account.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Account>"
+      },
+      "Customer.Fields": {
+        "title": "Customer.Fields",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "boolean"
+          },
+          "firstName": {
+            "type": "boolean"
+          },
+          "lastName": {
+            "type": "boolean"
+          },
+          "address": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Customer.ScopeFilter": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false,
+        "title": "Customer.ScopeFilter"
+      },
+      "Customer.IncludeFilter.Items": {
+        "title": "Customer.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Customer.ScopeFilter"
+          }
+        }
+      },
+      "Customer.Filter": {
+        "type": "object",
+        "title": "Customer.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fields": {
+            "$ref": "#/components/schemas/Customer.Fields"
+          },
+          "include": {
+            "title": "Customer.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Customer>"
+      },
+      "Customer.Filter1": {
+        "type": "object",
+        "title": "Customer.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "where": {
+            "title": "Customer.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "$ref": "#/components/schemas/Customer.Fields"
+          },
+          "include": {
+            "title": "Customer.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Customer>"
+      },
+      "Transaction.Fields": {
+        "title": "Transaction.Fields",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "boolean"
+          },
+          "createdOn": {
+            "type": "boolean"
+          },
+          "accountId": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Transaction.ScopeFilter": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false,
+        "title": "Transaction.ScopeFilter"
+      },
+      "Transaction.IncludeFilter.Items": {
+        "title": "Transaction.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Transaction.ScopeFilter"
+          }
+        }
+      },
+      "Transaction.Filter": {
+        "type": "object",
+        "title": "Transaction.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fields": {
+            "$ref": "#/components/schemas/Transaction.Fields"
+          },
+          "include": {
+            "title": "Transaction.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Transaction>"
+      },
+      "Transaction.Filter1": {
+        "type": "object",
+        "title": "Transaction.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "where": {
+            "title": "Transaction.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "$ref": "#/components/schemas/Transaction.Fields"
+          },
+          "include": {
+            "title": "Transaction.IncludeFilter",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction.IncludeFilter.Items"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Transaction>"
+      }
+    }
+  }
+}

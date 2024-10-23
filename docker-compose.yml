@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: hello
+      MYSQL_DATABASE: mobilab_account_management
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+  mobilabservice:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysql
